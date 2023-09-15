@@ -3,14 +3,15 @@ from tkinter import messagebox as ms
 from src.Stage import Stage
 import re
 from tkinter import ttk
+from PIL import Image, ImageTk
+
 
 MainPage = tk.Tk()
 MainPage.attributes('-fullscreen',True)
-MainPage.config(width=1000,height=600)
+MainPage.config(width=1000,height=6000)
 MainPage.title("Gestion Des Stage")
-lb = tk.Label(MainPage,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold").place(x=800,y=560)
+lb = tk.Label(MainPage,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold").place(x=900,y=960)
 # MainPage.overrideredirect(True)
-MainPage.resizable(False,False)
 MainPage.iconbitmap(("icon.ico"))
 
 
@@ -18,9 +19,9 @@ MainPage.iconbitmap(("icon.ico"))
 
 
 def FormuleAdd():
-    myframe = tk.Frame(MainPage,width=850,height=600,bg="#bef1ff")
+    myframe = tk.Frame(MainPage,width=8500,height=6000,bg="#bef1ff")
     myframe.place(x=150,y=0)
-    lb = tk.Label(myframe,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold",bg="#bef1ff").place(x=650,y=560)
+    lb = tk.Label(myframe,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold",bg="#bef1ff").place(x=900,y=960)
 
     tk.Label(myframe,text="Ajouter Un Stage A la Liste Des Stage",bg="#bef1ff", fg="blue",font="Times 20 italic bold").place(x=200,y=10)
     # id
@@ -87,10 +88,10 @@ def FormuleAdd():
 FormuleAdd()
 
 
-def FormuleEdit():
-    myframe = tk.Frame(MainPage,width=850,height=600,bg="#bef1ff")
+def FormuleEdit(): 
+    myframe = tk.Frame(MainPage,width=850,height=6000,bg="#bef1ff")
     myframe.place(x=150,y=0)
-    lb = tk.Label(myframe,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold",bg="#bef1ff").place(x=650,y=560)
+    lb = tk.Label(myframe,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold",bg="#bef1ff").place(x=900,y=960)
 
     tk.Label(myframe,text="Afficher tout les Stage",bg="#bef1ff", fg="blue",font="Times 20 italic bold").place(x=300,y=10)
     data = Stage.getAllData()
@@ -113,7 +114,7 @@ def FormuleEdit():
     def ModifyOrDeleteFormule(id):
         values = table.item(table.focus())["values"]
         if len(values):
-            myframe2 = tk.Frame(MainPage,width=850,height=600,bg="#bef1ff")
+            myframe2 = tk.Frame(MainPage,width=850,height=6000,bg="#bef1ff")
             myframe2.place(x=150,y=0)
             tk.Label(myframe2,text="Supprimer et Modifier Un Stage",bg="#bef1ff", fg="blue",font="Times 20 italic bold").place(x=200,y=10)
     # id
@@ -197,9 +198,9 @@ def FormuleEdit():
 # Searsh Formulair
 
 def SearshForm():
-    myframe3 = tk.Frame(MainPage,width=850,height=600,bg="#bef1ff")
+    myframe3 = tk.Frame(MainPage,width=850,height=6000,bg="#bef1ff")
     myframe3.place(x=150,y=0)
-    lb = tk.Label(myframe3,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold",bg="#bef1ff").place(x=650,y=560)
+    lb = tk.Label(myframe3,text="Made By Ismail Ait Hsaine",font="Times 12 italic bold",bg="#bef1ff").place(x=900,y=960)
     tk.Label(myframe3,text="chercher un Stage",bg="#bef1ff", fg="blue",font="Times 20 italic bold").place(x=300,y=10)
     var = tk.IntVar(myframe3)
     
@@ -271,7 +272,7 @@ def SearshForm():
 
 
 
-btnsFrame = tk.Frame(MainPage,width=150,height=600,bg="#000000")
+btnsFrame = tk.Frame(MainPage,width=150,height=6000,bg="#000000")
 btnsFrame.place(x=0,y=0)
 
 
@@ -279,9 +280,8 @@ addbtn = tk.Button(btnsFrame,text="Ajouter Un Stage",width=14,height=2,bg="black
 
 addbtn.place(x=5,y=10)
 deleteBtn = tk.Button(btnsFrame,text="Afficher les stages",width=14,height=2,bg="black",fg="white",font="Times 11 italic bold",border=5,command=FormuleEdit)
-deleteBtn.place(x=5,y=80)
-deleteBtn = tk.Button(btnsFrame,text="Chercher Un Stage",width=14,height=2,bg="black",fg="white",font="Times 11 italic bold",border=5,command=SearshForm)
-deleteBtn.place(x=5,y=150)
+deleteBtn.place(x=5,y=80)   
+tk.Button(btnsFrame,text="Chercher Un Stage",width=14,height=2,bg="black",fg="white",font="Times 11 italic bold",border=5,command=SearshForm).place(x=5,y=150)
 
 
 
@@ -296,11 +296,14 @@ deleteBtn.place(x=5,y=150)
 
 
 
+image = Image.open("assets/imgs/crois.webp")
+resized_image = image.resize((25, 25), )
 
+# Create a PhotoImage object from the resized image
+icon_image = ImageTk.PhotoImage(resized_image)
 
-""" addIMG = tk.PhotoImage(file="add.png")
-btnAdd = tk.Button(btnsFrame,image=addIMG)
-btnAdd.place(x=10,y=10) """
+btnAdd = tk.Button(MainPage,image=icon_image,command= lambda : MainPage.destroy())
+btnAdd.place(x=1230,y=10) 
 
 
 MainPage.mainloop()
